@@ -1,0 +1,8 @@
+*.tex
+*.txt
+*.png
+*.eps
+.DS_*
+*.pdf
+*.doc
+*.gph
