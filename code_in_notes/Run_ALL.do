@@ -11,3 +11,5 @@ do dayly_stock_price.do
 do gdp_growth.do
 do stock_return.do
 do stochastic_path.do
+do auto_corr_gdp.do
+do auto_corr_stock.do
