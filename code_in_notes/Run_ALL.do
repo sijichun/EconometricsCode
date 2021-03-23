@@ -14,3 +14,5 @@ do stochastic_path.do
 do auto_corr_gdp.do
 do auto_corr_stock.do
 do simulate_ma.do
+do simulate_ar.do
+do simulate_arma.do
