@@ -6,6 +6,7 @@ do nls_mpc.do
 do weighted_ols.do
 do qreg_outlier.do
 do hcw_lasso.do
+do local_poly_cv.do
 do quarterly_gdp.do
 do dayly_stock_price.do
 do gdp_growth.do
