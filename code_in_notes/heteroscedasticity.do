@@ -17,9 +17,7 @@ program define dgp, rclass
 	return scalar r_se=_se[`x']
 end
 // multicolinearty, size
-simulate b=r(b) se=r(se) rb=r(r_b) rse=r(r_se),/*
-	*/ reps(2000): dgp
+simulate b=r(b) se=r(se) rb=r(r_b) rse=r(r_se), reps(2000): dgp
 su
-simulate b=r(b) se=r(se) rb=r(r_b) rse=r(r_se),/*
-	*/ reps(2000): dgp, hetero(1)
+simulate b=r(b) se=r(se) rb=r(r_b) rse=r(r_se), reps(2000): dgp, hetero(1)
 su

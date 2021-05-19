@@ -1,24 +1,19 @@
 // file: chow_test.do
-use datasets/cfps_adult, clear
-gen log_income=log(p_income+1)
-drop if qq1101<0
-drop if te4<0
-// 产生变量
-gen male=cfps_gender
-gen female=1-cfps_gender
-tab te4, gen(edu)
-local nulls "(male=female)"
-local explans "male female"
-foreach v of varlist qq1101 edu*{
-    gen `v'f=`v'*female
-    gen `v'm=`v'*male
-    local nulls "`nulls' (`v'f=`v'm)"
-    local explans "`explans' `v'f `v'm"
-}
-// 分组回归
-reg log_income qq1101 edu1-edu7 if male==1
-reg log_income qq1101 edu1-edu7 if female==1
-// 合并回归并检验
-reg log_income `explans', noconstant
-di "`nulls'"
-test `nulls'
+use datasets/citydata, clear
+keep if Year==2011
+gen pop_growth=v8/100
+gen log_pop=log(v4)
+gen log_pop_dens=log(v80)
+// 省会城市虚拟变量
+gen metropolis=(mod(CityCode,10000)==0 | mod(CityCode,10000)==100)
+// 乘积
+gen d=metropolis
+gen nd=1-metropolis
+gen d_log_pop=d*log_pop
+gen nd_log_pop=nd*log_pop
+gen d_log_pop_dens=d*log_pop_dens
+gen nd_log_pop_dens=nd*log_pop_dens
+// 回归，无常数项
+reg pop_growth d nd d_log_pop nd_log_pop d_log_pop_dens nd_log_pop_dens, noc
+// 检验
+test (d=nd) (d_log_pop=nd_log_pop) (d_log_pop_dens=nd_log_pop_dens)

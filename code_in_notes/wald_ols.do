@@ -25,10 +25,8 @@ program define dgp, rclass
 	return scalar teststat=``test_stat''
 end
 // simulate
-simulate rejected=r(rejected) teststat=r(teststat)/*
-        */ ,reps(2000):dgp
+simulate rejected=r(rejected) teststat=r(teststat) ,reps(2000):dgp
 su
 hist teststat
-simulate rejected=r(rejected) teststat=r(teststat)/*
-        */ ,reps(2000):dgp, b(0)
+simulate rejected=r(rejected) teststat=r(teststat) ,reps(2000):dgp, b(0)
 su

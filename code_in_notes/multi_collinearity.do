@@ -26,18 +26,14 @@ program define dgp, rclass
 	return scalar neg=_b[`x1']<0
 end
 // multicolinearty, size
-simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg)/*
-        */ ,reps(2000):dgp
+simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg), reps(2000):dgp
 su
 // multicolinearty, power
-simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg)/*
-        */ ,reps(2000):dgp, b(1)
+simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg), reps(2000):dgp, b(1)
 su
 // no multicolinearty, power
-simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg)/*
-        */ ,reps(2000):dgp, b(1) mc(0)
+simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg), reps(2000):dgp, b(1) mc(0)
 su
 // multicolinearty, power with large N
-simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg)/*
-        */ ,reps(2000):dgp, b(1) obs(100)
+simulate rejected=r(rejected) b=r(b) se=r(se) neg=r(neg), reps(2000):dgp, b(1) obs(100)
 su
