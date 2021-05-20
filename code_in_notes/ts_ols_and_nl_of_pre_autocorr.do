@@ -20,5 +20,4 @@ reg y x
 // 更正的OLS
 reg y L.y x L.x
 // 非线性最小二乘
-nl (y={alpha}*(1-{rho})+{rho}*L.y+{beta}*x /*
-	*/-{rho}*{beta}*L.x) if t>1
+nl (y={alpha}*(1-{rho})+{rho}*L.y+{beta}*x-{rho}*{beta}*L.x) if t>1

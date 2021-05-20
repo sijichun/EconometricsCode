@@ -18,6 +18,5 @@ program define tsmean, rclass
 	return scalar adjusted_se=_se[_cons]
 end
 
-simulate m=r(sample_mean) se=r(unadjusted_se) ase=r(adjusted_se),/*
-	*/ reps(1000): tsmean
+simulate m=r(sample_mean) se=r(unadjusted_se) ase=r(adjusted_se), reps(1000): tsmean
 su

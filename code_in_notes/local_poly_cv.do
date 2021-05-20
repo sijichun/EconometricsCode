@@ -34,8 +34,7 @@ forvalues p=1/5{
         // 对选取的10个测试集进行交叉验证
         forvalues i=1/10{
             quietly: reg y `control' [iw=w] if _n~=`i'
-            local cv_error2=`cv_error2'+ ///
-                  (y[`i']-_b[_cons])^2
+            local cv_error2=`cv_error2'+(y[`i']-_b[_cons])^2
         }
         drop w
         // 计算均方误差
