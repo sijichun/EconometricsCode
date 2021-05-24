@@ -17,3 +17,5 @@ do auto_corr_stock.do
 do simulate_ma.do
 do simulate_ar.do
 do simulate_arma.do
+do stock_return_facts.do
+do arma_model_selection.do
