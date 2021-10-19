@@ -18,3 +18,4 @@ do simulate_ar.do
 do simulate_arma.do
 do stock_return_facts.do
 do arma_model_selection.do
+do predict_log.do

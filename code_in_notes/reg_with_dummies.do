@@ -7,3 +7,5 @@ reg p_income edu*
 outreg2 using reg_with_dummies.tex, replace
 reg p_income edu*, noconstant
 outreg2 using reg_with_dummies.tex, append
+reg p_income edu2-edu7
+outreg2 using reg_with_dummies.tex, append
