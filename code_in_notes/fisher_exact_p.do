@@ -47,4 +47,4 @@ sum d_extreme
 di "test stats=" `test_stat' _skip  ", Fisher's exact p=" r(mean)
 
 hist stats, xline(`test_stat')
-graph export fisher_exact_t.pdf, replace
+graph export fisher_exact_p.pdf, replace
