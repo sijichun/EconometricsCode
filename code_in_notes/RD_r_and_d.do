@@ -3,7 +3,7 @@ set more off
 use datasets/bronzini_r_and_d.dta
 
 gen s=score-75
-gen treat=s>0
+gen treat=s>=0
 gen s2=s^2 
 gen s3=s^3
 
