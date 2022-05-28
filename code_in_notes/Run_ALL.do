@@ -20,3 +20,4 @@ do stock_return_facts.do
 do arma_model_selection.do
 do predict_log.do
 do fisher_exact_p.do
+do arch_est.do
