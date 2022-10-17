@@ -1,6 +1,7 @@
 // file: cross_validation_reg.do
 clear
 set obs 50
+set seed 1000
 gen x=runiform()*3
 gen y=exp(x)+rnormal()*2
 local control ""
