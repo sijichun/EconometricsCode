@@ -1,4 +1,4 @@
-// linear_panel_fd.do
+// linear_panel_fd_np.do
 clear
 set more off
 use datasets/voting_cnty_clean.dta
