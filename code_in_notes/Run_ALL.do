@@ -16,6 +16,10 @@ do auto_corr_stock.do
 do simulate_ma.do
 do simulate_ar.do
 do simulate_arma.do
+do simulate_causal.do
+do inversability_ma.do
+do predicting_arma.do
+do simulate_arch.do
 do stock_return_facts.do
 do arma_model_selection.do
 do predict_log.do
