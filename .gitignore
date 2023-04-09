@@ -9,3 +9,4 @@
 *.xlsx
 quarterlyGDP.csv
 *.mmat
+.ipynb_checkpoints
