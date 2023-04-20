@@ -11,5 +11,6 @@ forvalues i=1/5{
 gen lag_nurses=L.nurses
 gen lag_doctors_pc=L.doctors_pc
 local E_controls "lag_log_pop_* lag_log_wage_* lag_nurses lag_doctors_pc"
-reghdfe Votes_SPS_ Watch_probit `E_controls' if year==1999, a(region) cluster(region) 
+reghdfe Votes_SPS_ Watch_probit `E_controls' if year==1999, a(region) cluster(region)
 dsregress Votes_SPS_ Watch_probit if year==1999, controls((i.region) `E_controls') cluster(region) selec(cv)
+
