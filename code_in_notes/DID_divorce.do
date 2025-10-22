@@ -7,10 +7,10 @@ egen state=group(st)
 xtset state year
 gen year2=year^2
 ** benchmark
-reghdfe div_rate unilateral divx* if year>1967 & year<1989 [w=stpop], absorb(i.state i.year) cl(state)
+reghdfe div_rate unilateral divx* if year>1967 & year<1989 [aw=stpop], absorb(i.state i.year) cl(state)
 ** state-specific trend
-reghdfe div_rate unilateral divx* if year>1967 & year<1989 [w=stpop], absorb(i.state i.year i.state#c.year) cl(state)
-reghdfe div_rate unilateral divx* if year>1967 & year<1989 [w=stpop], absorb(i.state i.year i.state#c.year i.state#c.year2) cl(state)
+reghdfe div_rate unilateral divx* if year>1967 & year<1989 [aw=stpop], absorb(i.state i.year i.state#c.year) cl(state)
+reghdfe div_rate unilateral divx* if year>1967 & year<1989 [aw=stpop], absorb(i.state i.year i.state#c.year i.state#c.year2) cl(state)
 
 ** common trend
 
@@ -48,7 +48,7 @@ gen F17unilateral = delta_year==17
 gen F18unilateral = delta_year==18
 gen F19unilateral= delta_year==19
 gen F20unilateral = delta_year>=20
-reghdfe div_rate L12unilateral - F20unilateral divx* if year>1967 & year<1989 [w=stpop], absorb(i.state i.year)
+reghdfe div_rate L12unilateral - F20unilateral divx* if year>1967 & year<1989 [aw=stpop], absorb(i.state i.year)
 coefplot, keep(*unilateral*) vert xline(12)
 ** dynamic effects
-reghdfe div_rate unilateral0 - F20unilateral divx* if year>1967 & year<1989 [w=stpop], absorb(i.state i.year) cl(state)
+reghdfe div_rate unilateral0 - F20unilateral divx* if year>1967 & year<1989 [aw=stpop], absorb(i.state i.year) cl(state)
