@@ -10,3 +10,4 @@
 quarterlyGDP.csv
 *.mmat
 .ipynb_checkpoints
+*.stswp

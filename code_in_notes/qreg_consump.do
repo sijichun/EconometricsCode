@@ -1,25 +1,33 @@
 // file: qreg_consump.do
-use datasets/cfps_family_econ, clear
-drop if expense<=0
-drop if fincome1<=0
-gen log_consump=log(expense)
-gen log_income=log(fincome1)
-// quantile regression, one variate
-qreg log_consump log_income, q(0.25)
-predict p_log_consump25
-label variable p_log_consump25 "25% quantile"
-qreg log_consump log_income, q(0.50)
-predict p_log_consump50
-label variable p_log_consump50 "50% quantile"
-qreg log_consump log_income, q(0.75)
-predict p_log_consump75
-label variable p_log_consump75 "75% quantile"
-// graph
-sort log_income
-twoway (scatter log_consump     log_income)/*
-	*/ (line    p_log_consump25 log_income)/*
-	*/ (line    p_log_consump50 log_income)/*
-	*/ (line    p_log_consump75 log_income)
-// comparison
-sqreg log_consump log_income i.provcd14, q(0.25 0.5 0.75)
-test [q25]log_income=[q50]log_income=[q75]log_income
+use datasets/chfs2017_hh.dta, clear
+drop if total_income < 0
+drop if max(censor_total_consump, censor_total_income)
+gen log_total_consump = log(total_consump+1)
+gen log_total_income = log(total_income+1)
+gen log_total_income2 = log_total_income^2
+// 一次函数
+qreg log_total_consump log_total_income
+predict pred_consump_50
+label variable pred_consump_50 "50%分位数"
+qreg log_total_consump log_total_income, q(0.25)
+predict pred_consump_25
+label variable pred_consump_25 "25%分位数"
+qreg log_total_consump log_total_income, q(0.75)
+predict pred_consump_75
+label variable pred_consump_75 "75%分位数"
+sort total_income
+twoway (scatter log_total_consump log_total_income) (line pred_consump_50 log_total_income) (line pred_consump_25 log_total_income) (line pred_consump_75 log_total_income)
+graph export qreg_one_variate1.pdf, replace
+// 二次函数
+qreg log_total_consump log_total_income*
+predict pred_consump2_50
+label variable pred_consump_50 "50%分位数"
+qreg log_total_consump log_total_income*, q(0.25)
+predict pred_consump2_25
+label variable pred_consump_25 "25%分位数"
+qreg log_total_consump log_total_income*, q(0.75)
+predict pred_consump2_75
+label variable pred_consump_75 "75%分位数"
+sort total_income
+twoway (scatter log_total_consump log_total_income) (line pred_consump2_50 log_total_income) (line pred_consump2_25 log_total_income) (line pred_consump2_75 log_total_income)
+graph export qreg_one_variate2.pdf, replace

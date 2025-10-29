@@ -1,4 +1,6 @@
 do reg_one_variate.do
+do qreg_one_variate.do
+do qreg_simulate.do
 do lasso_and_ridge_shrinkage.do
 do DID_dynamic_trend.do
 do logit_and_roc.do
