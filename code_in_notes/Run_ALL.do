@@ -1,5 +1,4 @@
 do reg_one_variate.do
-do qreg_one_variate.do
 do qreg_simulate.do
 do lasso_and_ridge_shrinkage.do
 do DID_dynamic_trend.do
@@ -28,3 +27,6 @@ do predict_log.do
 do fisher_exact_p.do
 do arch_est.do
 do quadratic.do
+do ts_detrend.do
+do simulate_unit_root.do
+do simulate_rw_coef.do

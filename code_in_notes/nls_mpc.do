@@ -13,5 +13,5 @@ predict expense_nls
 gen mpc=_b[/beta]*_b[/gamma]*fincome1^(_b[/gamma]-1)
 // 画图
 sort fincome1
-twoway (scatter expense fincome1) (line expense_linear fincome1 (line expense_nls fincome1)
+twoway (scatter expense fincome1) (line expense_linear fincome1) (line expense_nls fincome1)
 graph export nls_mpc.pdf, replace
