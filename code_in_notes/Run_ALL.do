@@ -30,3 +30,4 @@ do quadratic.do
 do ts_detrend.do
 do simulate_unit_root.do
 do simulate_rw_coef.do
+do ts_detrend_diff.do
