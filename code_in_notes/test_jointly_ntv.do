@@ -12,5 +12,5 @@ forvalues i=1/5{
     gen log_wage_`i'=log_wage^`i'
 }
 local E_controls "L.log_pop_* L.log_wage_* L.nurses L.doctors_pc"
-reghdfe NTV L4.Votes_NDR_ L4.Votes_SPS_ L4.Votes_Yabloko_ L4.Votes_KPRF_ L4.Votes_LDPR_ L4.Turnout `E_controls' if year==1999, absorb(region)
+reghdfe NTV L4.Votes_NDR_ L4.Votes_SPS_ L4.Votes_Yabloko_ L4.Votes_KPRF_ L4.Votes_LDPR_ L4.Turnout `E_controls' if year==1999, absorb(region) cluster(region)
 test L4.Votes_NDR_ L4.Votes_SPS_ L4.Votes_Yabloko_ L4.Votes_KPRF_ L4.Votes_LDPR_ L4.Turnout
