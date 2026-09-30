@@ -1,40 +1,29 @@
 clear
 set more off
-use ../datasets/cfps_adult.dta
+use ../datasets/chfs2017_ind.dta
 // 清洗并产生数据
-drop if employ2014<0
-drop if te4<0
-drop if qa301<0 | qa301==5
-gen exit_labor=employ2014==3
-gen age=2014-cfps_birth
+// a3143=3 为从未找工作，即退出劳动力市场，需删掉
+drop if a3143==3
+gen unemployed = a3101==2 & a3143!=3
+gen age=2017-a2005
 gen age2=age^2
-gen urban_hukou=qa301==3
-// odds ratio
-tab exit_labor cfps_gender
+rename a2012 edu_level
+gen sex=2-a2003
+drop if a2022==7777
+rename a2022 hukou
 // 回归并预测
-local x "age age2 cfps_gender urban_hukou i.provcd14 i.te4"
-local reportvar "age age2 cfps_gender urban_hukou"
-logit exit_labor cfps_gender
-margins, dydx(*) post
-outreg2 using logit_roc.doc, replace keep(`reportvar') ctitle(Logit)
-logistic exit_labor cfps_gender
-outreg2 using logit_roc.doc, append keep(`reportvar') ctitle(Logistic)
-logit exit_labor `x'
-margins, dydx(*) post
-outreg2 using logit_roc.doc, append keep(`reportvar') ctitle(Logit)
-probit exit_labor `x'
-margins, dydx(*) post
-outreg2 using logit_roc.doc, append keep(`reportvar') ctitle(Probit)
-logistic exit_labor `x'
-outreg2 using logit_roc.doc, append keep(`reportvar') ctitle(Logistic)
-// 如果用probit模型：probit exit_labor `x'
-predict p_exit // 预测概率
+local x "age age2 sex i.hukou i.edu_level"
+logit unemployed `x'
+predict p_unemployed // 预测概率
+// 使用预测值计算R2
+corr unemployed p_unemployed
+local R2_corr2=r(rho)^2
 // 计算cutoff=0.5时的查准率、查全率
-gen predict_exit=p_exit>0.5
-gen TP=(exit_labor==1 & predict_exit==1)
-gen FP=(exit_labor==0 & predict_exit==1)
-gen FN=(exit_labor==1 & predict_exit==0)
-gen TN=(exit_labor==0 & predict_exit==0)
+gen predict_unemployed=p_unemployed>0.5
+gen TP=(unemployed==1 & predict_unemployed==1)
+gen FP=(unemployed==0 & predict_unemployed==1)
+gen FN=(unemployed==1 & predict_unemployed==0)
+gen TN=(unemployed==0 & predict_unemployed==0)
 foreach v of varlist TP FP FN TN{
 	quietly: su `v'
 	local `v' = r(mean)
@@ -44,7 +33,8 @@ local precision=`TP'/(`TP'+`FP')
 local recall=`TP'/(`TP'+`FN')
 local accuracy=(`TP'+`TN')/(`TP'+`TN'+`FP'+`FN')
 local F1=(2*`precision'*`recall')/(`precision'+`recall')
-di "R2=`R2'"
+di "相关系数平方计算R2=`R2_corr2'"
+di "Pseudo-R2=`R2'"
 di "查准率=`precision'"
 di "查全率=`recall'"
 di "精度=`accuracy'"
