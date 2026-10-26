@@ -1,6 +1,6 @@
 clear
 set more off
-use "datasets/Divorce-Wolfers-AER.dta"
+use "../datasets/Divorce-Wolfers-AER.dta"
 ** state dummies
 egen state=group(st)
 ** panel setting

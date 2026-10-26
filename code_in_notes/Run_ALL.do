@@ -21,6 +21,8 @@ do model_selection.do
 cd "`root'/Chap.3"
 do local_poly_cv.do
 do local_constant.do
+do local_linear.do
+do local_polynomial.do
 
 ** Chap.4 GLM
 cd "`root'/Chap.4"
@@ -57,6 +59,7 @@ do oneway_anova.do
 do test_jointly_ntv.do
 do wald_ols.do
 do white_hetero.do
+do bootstrap_student.do
 
 ** Chap.10 DML_selection
 cd "`root'/Chap.10"
@@ -84,6 +87,9 @@ do linear_panel_fe.do
 ** Chap.15 DID
 cd "`root'/Chap.15"
 do hcw_lasso.do
+do DID_disease.do
+do DID_divorce_event_study.do
+do did_newspaper.do
 
 ** Chap.17 IV
 cd "`root'/Chap.17"
@@ -132,10 +138,6 @@ do ts_detrend_diff.do
 
 ** 未分配到章节的脚本（留在根目录）
 cd "`root'"
-do DID_dynamic_trend.do
-do DID_disease.do
-do DID_divorce.do
-do DID_divorce_event_study.do
 do HCW.do
 do RD_r_and_d.do
 do binary_logit_eut.do
@@ -145,15 +147,12 @@ do binary_logit_lottery.do
 do binary_logit_mle.do
 do conditional_logit_simu.do
 do covatiates_balancing.do
-do did_newspaper.do
 do experiment_reg_hetero.do
 do ipw_doubly_robust.do
 do linear_panel.do
 do linear_panel_fd_np.do
 do linear_panel_fe_ntv.do
 do ljung-box_test.do
-do local_linear.do
-do local_polynomial.do
 do matching.do
 do matching_nonexp.do
 do matching_psm.do
@@ -163,10 +162,8 @@ do ohie_qje.do
 do ohie_science.do
 do panel_binary.do
 do panel_dynamic.do
-do poisson.do
 do propensity_score.do
 do qreg_with_dummy.do
-do random_forest_stata.do
 do rd_fuzzy_pmgsy.do
 do reg_small_b.do
 do simulate_fe.do
