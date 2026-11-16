@@ -96,6 +96,11 @@ cd "`root'/Chap.17"
 do CivilConflict.do
 do lasso_iv.do
 
+** Chap.20 RD
+cd "`root'/Chap.20"
+do RD_r_and_d.do
+do rd_fuzzy_pmgsy.do
+
 ** Chap.25 TimeSeries
 cd "`root'/Chap.25"
 do quarterly_gdp.do
@@ -139,7 +144,6 @@ do ts_detrend_diff.do
 ** 未分配到章节的脚本（留在根目录）
 cd "`root'"
 do HCW.do
-do RD_r_and_d.do
 do binary_logit_eut.do
 do binary_logit_eut_fechner.do
 do binary_logit_eut_fechner_hetero.do
@@ -164,7 +168,6 @@ do panel_binary.do
 do panel_dynamic.do
 do propensity_score.do
 do qreg_with_dummy.do
-do rd_fuzzy_pmgsy.do
 do reg_small_b.do
 do simulate_fe.do
 do simulate_sprious.do

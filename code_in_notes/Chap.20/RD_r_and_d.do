@@ -1,6 +1,6 @@
 clear
 set more off
-use datasets/bronzini_r_and_d.dta
+use ../datasets/bronzini_r_and_d.dta, clear
 
 gen s=score-75
 gen treat=s>=0
@@ -34,8 +34,8 @@ predict l_pred_INVSALES
 reg INVSALES treat rs rs2 rs3 if s>=0 & s<10
 predict r_pred_INVSALES
 sort s
-twoway (scatter INVSALES s if s<10 & s>-10)/*
-	*/ (line l_pred_INVSALES s if s<=0 & s>-10)/*
-	*/ (line r_pred_INVSALES s if s>=0 & s<10)
+twoway (scatter INVSALES s if s<10 & s>-10) /// 
+       (line l_pred_INVSALES s if s<=0 & s>-10) ///
+	   (line r_pred_INVSALES s if s>=0 & s<10)
 // manipulation检验
 rddensity s, c(0) plot

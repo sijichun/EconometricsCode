@@ -1,7 +1,7 @@
 // rd_fuzzy_pmgsy.do
 clear
 set more off
-use datasets/pmgsy_working_aer_mainsample.dta
+use ../datasets/pmgsy_working_aer_mainsample.dta, clear
 
 // triangle kernel and bandwidth
 local bw = 80
@@ -46,6 +46,8 @@ sort v_pop
 rdplot transport_index_andrsn v_pop, p(1) h(`bw') kernel(tri)
 
 // Fuzzy or IV
+// 注意：rdplot 会残留不完整的 e() 结果，需先清除，否则 ivregress 会报 r(301)
+ereturn clear
 ivregress 2sls transport_index_andrsn (r2012=t) l1 r1 [aw = kw], cluster(`clse')
 ivreghdfe transport_index_andrsn (r2012=t) l1 r1 `controls' [aw = kw], a(`fe') cluster(`clse')
 ivreghdfe transport_index_andrsn (r2012=t) l1 l2 r1 r2 `controls' [aw = kw], a(`fe') cluster(`clse')
